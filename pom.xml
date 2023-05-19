@@ -5,26 +5,30 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.6</version>
+		<version>3.0.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.todolist.app</groupId>
 	<artifactId>spring-mvc-boot-todo-list</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 	<name>spring-mvc-boot-todo-list</name>
 	<description>Todo list project for Spring Boot</description>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>17</java.version>
-		<tomcat.version>9.0.44</tomcat.version>
-		<spring.tomcat.version>2.4.4</spring.tomcat.version>
 		<javax.version>1.2</javax.version>
-		<jakarta.version>5.0.0</jakarta.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
@@ -36,8 +40,6 @@
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
-			<version>${tomcat.version}</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -46,17 +48,6 @@
 			<version>${javax.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>jakarta.servlet</groupId>
-			<artifactId>jakarta.servlet-api</artifactId>
-			<version>${jakarta.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
 
 	<build>
