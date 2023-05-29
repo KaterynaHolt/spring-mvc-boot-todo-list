@@ -3,16 +3,21 @@ package com.todolist.app.springmvcboottodolist.service;
 import com.todolist.app.springmvcboottodolist.models.Item;
 import com.todolist.app.springmvcboottodolist.models.Priority;
 import com.todolist.app.springmvcboottodolist.models.Tag;
-import org.springframework.context.annotation.Bean;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import com.todolist.app.springmvcboottodolist.models.Status;
 import java.util.*;
 
+
 @Service
 public class ToDoListStore implements Store{
-    private static final Map<String, Item> items = new LinkedHashMap<>();
+    private final Map<String, Item> items = new LinkedHashMap<>();
 
-    static {
+    /**
+     * This method adds some tasks at the beginning
+     */
+    @PostConstruct
+    private void init(){
         List<Tag> tags1 = new ArrayList<>();
         tags1.add(Tag.WORK);
         tags1.add(Tag.READING);
@@ -27,11 +32,36 @@ public class ToDoListStore implements Store{
         items.put(getUuid(), new Item("Task 3", "2023-04-10", Status.COMPLETED, Priority.CRITICAL, tags3));
     }
 
+    /**
+     * This method gets items to map by their Status
+     * @param status - status for choosing
+     * @return map with items, which are completed or not
+     */
+    public Map<String, Item> getItemsByStatus(Status status){
+        Map<String, Item> result = new LinkedHashMap<>();
+        if(status.equals(Status.COMPLETED)){
+            for(Map.Entry<String, Item> entry : getItems().entrySet()){
+                if(entry.getValue().getStatus().equals(Status.COMPLETED)){
+                    result.put(entry.getKey(), entry.getValue());
+                }
+            }
+        }
+        else{
+            for(Map.Entry<String, Item> entry : getItems().entrySet()){
+                if(!entry.getValue().getStatus().equals(Status.COMPLETED)){
+                    result.put(entry.getKey(), entry.getValue());
+                }
+            }
+        }
+        return result;
+    }
+
+
     public synchronized Map<String, Item> getItems() {
         return items;
     }
 
-    public static synchronized String getUuid() {
+    public synchronized String getUuid() {
         return UUID.randomUUID().toString();
     }
 

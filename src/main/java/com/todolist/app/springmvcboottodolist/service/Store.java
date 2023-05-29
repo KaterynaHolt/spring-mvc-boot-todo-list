@@ -3,6 +3,7 @@ package com.todolist.app.springmvcboottodolist.service;
 import com.todolist.app.springmvcboottodolist.models.Item;
 import com.todolist.app.springmvcboottodolist.models.Status;
 
+
 public interface Store {
     /**
      * This method adds a new task to todo list
