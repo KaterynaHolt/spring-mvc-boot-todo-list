@@ -18,8 +18,6 @@ import java.util.Map;
 @RequestMapping("/see-all-tasks")
 public class SeeAllTasksController {
     @Autowired
-    private Store store;
-    @Autowired
     private ToDoListStore todo;
 
     @GetMapping
@@ -36,8 +34,7 @@ public class SeeAllTasksController {
 
     @PostMapping
     public String pushAddButton(){
-        //return "redirect:new-task";
-        return "new-task";
+        return "redirect:new-task";
     }
 
 }
