@@ -13,8 +13,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class SeeAllTasksControllerTest {
     @Autowired
     private MockMvc mockMvc;
+
+    /**
+     * Test of getting see-all-tasks page
+     * @throws Exception
+     */
     @Test
-    public void test() throws Exception {
+    public void test_getting_see_all_tasks_page() throws Exception {
         this.mockMvc.perform(get("/see-all-tasks")).andDo(print()).andExpect(status().isOk());
     }
 
