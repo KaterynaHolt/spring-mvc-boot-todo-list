@@ -1,16 +1,12 @@
 package com.todolist.app.springmvcboottodolist.service;
 
 
-import com.todolist.app.springmvcboottodolist.controllers.HelloController;
 import com.todolist.app.springmvcboottodolist.models.Item;
 import com.todolist.app.springmvcboottodolist.models.Priority;
 import com.todolist.app.springmvcboottodolist.models.Status;
 import com.todolist.app.springmvcboottodolist.models.Tag;
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
