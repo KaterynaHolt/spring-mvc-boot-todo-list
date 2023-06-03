@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.UUID;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -34,8 +37,8 @@ public class NewTaskControllerTest {
         this.mockMvc.perform(post("/new-task").param("ADD", "ADD").param("text","Task 1").
                 param("date", "2023-10-05").param("status", "INCOMPLETED").
                 param("priority", "NORMAL").param("tags", "DAILYROUTINE").
-                param("tags", "HOME").param("tags", "READING")).andDo(print()).
-                andExpect(status().isOk());
+                param("tags", "HOME").param("tags", "READING")).andDo(print())
+                .andExpect(status().isFound());
     }
 
     /**
