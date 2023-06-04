@@ -33,6 +33,34 @@ public class ToDoListStore implements Store{
     }
 
     /**
+     * This method choose operation, which must be done
+     * @param operation - title of operation
+     * @param id - id of item
+     */
+    public void chooseOperation(String operation, String id){
+        if(operation.equals("COMPLETE")){
+            changeStatus(id, Status.COMPLETED);
+        }
+        else if(operation.equals("INCOMPLETE")){
+            changeStatus(id, Status.INCOMPLETED);
+        }
+        else if(operation.equals("REMOVE")){
+            removeItem(id);
+        }
+    }
+
+    /**
+     * This method gets item by id
+     * @param id - id of Item
+     * @return result - map of id and Item
+     */
+    public Optional<Map.Entry<String, Item>> getItemById(String id){
+        Optional<Map.Entry<String, Item>> result = items.entrySet().stream().filter(val -> val.getKey().
+                equals(id)).findFirst();
+        return result;
+    }
+
+    /**
      * This method gets items to map by their Status
      * @param status - status for choosing
      * @return map with items, which are completed or not

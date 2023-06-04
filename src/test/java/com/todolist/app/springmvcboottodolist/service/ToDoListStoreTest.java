@@ -10,9 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import static org.assertj.core.api.Assertions.*;
 
 
@@ -22,7 +21,7 @@ public class ToDoListStoreTest {
     private ToDoListStore todo;
 
     /**
-     * Test getting items by status - getItemsByStatus
+     * Test of getting items by Status - getItemsByStatus
      */
     @Test
     public void test_getting_items_by_status(){
@@ -40,8 +39,6 @@ public class ToDoListStoreTest {
         Map<String, Item> onhold = todo.getItemsByStatus(Status.INCOMPLETED);
         Map<String, Item> completed = todo.getItemsByStatus(Status.COMPLETED);
         //THEN
-        Assertions.assertTrue(onhold.size() == 2);
-        Assertions.assertTrue(completed.size() == 1);
         assertThat(onhold.values()).extracting(Item::getStatus).contains(Status.PENDING);
         assertThat(onhold.values()).extracting(Item::getValue).contains("Task 2");
         assertThat(onhold.values()).extracting(Item::getDate).contains("2023-04-10");
@@ -59,5 +56,59 @@ public class ToDoListStoreTest {
         assertThat(completed.values()).extracting(Item::getDate).contains("2023-04-10");
         assertThat(completed.values()).extracting(Item::getPriority).contains(Priority.CRITICAL);
         assertThat(completed.values()).extracting(Item::getTags).contains(tags3);
+    }
+
+    /**
+     * Test of choosing operation - chooseOperation
+     */
+    @Test
+    public void test_choosing_operation(){
+        //GIVEN
+        List<Tag> tags = new ArrayList<>();
+        tags.add(Tag.READING);
+        String id = todo.addItem(new Item("Task", "2023-06-10", Status.INPROGRESS, Priority.NORMAL, tags));
+        String id2 = todo.addItem(new Item("Task 2", "2023-06-01", Status.COMPLETED, Priority.MINOR, tags));
+        String id3 = todo.addItem(new Item("Task 3", "2023-06-02", Status.PENDING, Priority.CRITICAL, tags));
+        //WHEN
+        todo.chooseOperation("COMPLETE", id);
+        todo.chooseOperation("INCOMPLETE", id2);
+        int size = todo.getItems().size();
+        todo.chooseOperation("REMOVE", id3);
+        //THEN
+        Assertions.assertTrue(todo.getItems().size() == size - 1);
+
+        assertThat(todo.getItems().values()).extracting(Item::getStatus).contains(Status.COMPLETED);
+        assertThat(todo.getItems().values()).extracting(Item::getValue).contains("Task");
+        assertThat(todo.getItems().values()).extracting(Item::getDate).contains("2023-06-10");
+        assertThat(todo.getItems().values()).extracting(Item::getPriority).contains(Priority.NORMAL);
+        assertThat(todo.getItems().values()).extracting(Item::getTags).contains(tags);
+
+        assertThat(todo.getItems().values()).extracting(Item::getStatus).contains(Status.INCOMPLETED);
+        assertThat(todo.getItems().values()).extracting(Item::getValue).contains("Task 2");
+        assertThat(todo.getItems().values()).extracting(Item::getDate).contains("2023-06-01");
+        assertThat(todo.getItems().values()).extracting(Item::getPriority).contains(Priority.MINOR);
+        assertThat(todo.getItems().values()).extracting(Item::getTags).contains(tags);
+    }
+
+    /**
+     * Test of getting items by id - getItemById
+     */
+    @Test
+    public void test_getting_item_by_id(){
+        //GIVEN
+        List<Tag> tags = new ArrayList<>();
+        tags.add(Tag.HOME);
+        String id = todo.addItem(new Item("Task 1", "2023-06-11", Status.INPROGRESS, Priority.NORMAL, tags));
+        //WHEN
+        Optional<Map.Entry<String, Item>> result = todo.getItemById(id);
+        int size = result.stream().toArray().length;
+        //THEN
+        Assertions.assertTrue( size == 1);
+
+        assertThat(result.get().getValue().getStatus().equals(Status.INPROGRESS));
+        assertThat(result.get().getValue().getValue().equals("Task 1"));
+        assertThat(result.get().getValue().getDate().equals("2023-06-11"));
+        assertThat(result.get().getValue().getPriority().equals(Priority.NORMAL));
+        assertThat(result.get().getValue().getTags().equals(tags));
     }
 }

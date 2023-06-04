@@ -21,24 +21,10 @@ public class NotificationController {
     @Autowired
     private ToDoListStore store;
 
-    @Autowired
-    private Store st;
-
     @GetMapping
     public String getNotification(@RequestParam String operation, @RequestParam String id, Model model){
-        if(operation.equals("COMPLETE")){
-            st.changeStatus(id, Status.COMPLETED);
-        }
-        else if(operation.equals("INCOMPLETE")){
-            st.changeStatus(id, Status.INCOMPLETED);
-        }
-        else if(operation.equals("REMOVE")){
-            st.removeItem(id);
-        }
-        System.out.println(id);
-        System.out.println(operation);
-        Optional<Map.Entry<String, Item>> result = store.getItems().entrySet().stream().filter(val -> val.getKey().
-                equals(id)).findFirst();
+        store.chooseOperation(operation, id);
+        Optional<Map.Entry<String, Item>> result = store.getItemById(id);
         model.addAttribute("operation", operation);
         model.addAttribute("result", result);
         return "notification";
