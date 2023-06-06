@@ -9,16 +9,17 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-
 import java.util.*;
-
 import static org.assertj.core.api.Assertions.*;
 
 
-@WebMvcTest(ToDoListStore.class)
-public class ToDoListStoreTest {
+@WebMvcTest(ToDoListService.class)
+public class ToDoListServiceTest {
     @Autowired
-    private ToDoListStore todo;
+    private ToDoListService todo;
+
+    @Autowired
+    private ToDoListStore store;
 
     /**
      * Test of getting items by Status - getItemsByStatus
@@ -66,28 +67,28 @@ public class ToDoListStoreTest {
         //GIVEN
         List<Tag> tags = new ArrayList<>();
         tags.add(Tag.READING);
-        String id = todo.addItem(new Item("Task", "2023-06-10", Status.INPROGRESS, Priority.NORMAL, tags));
-        String id2 = todo.addItem(new Item("Task 2", "2023-06-01", Status.COMPLETED, Priority.MINOR, tags));
-        String id3 = todo.addItem(new Item("Task 3", "2023-06-02", Status.PENDING, Priority.CRITICAL, tags));
+        String id = store.addItem(new Item("Task", "2023-06-10", Status.INPROGRESS, Priority.NORMAL, tags));
+        String id2 = store.addItem(new Item("Task 2", "2023-06-01", Status.COMPLETED, Priority.MINOR, tags));
+        String id3 = store.addItem(new Item("Task 3", "2023-06-02", Status.PENDING, Priority.CRITICAL, tags));
         //WHEN
         todo.chooseOperation("COMPLETE", id);
         todo.chooseOperation("INCOMPLETE", id2);
-        int size = todo.getItems().size();
+        int size = store.getItems().size();
         todo.chooseOperation("REMOVE", id3);
         //THEN
-        Assertions.assertTrue(todo.getItems().size() == size - 1);
+        Assertions.assertTrue(store.getItems().size() == size - 1);
 
-        assertThat(todo.getItems().values()).extracting(Item::getStatus).contains(Status.COMPLETED);
-        assertThat(todo.getItems().values()).extracting(Item::getValue).contains("Task");
-        assertThat(todo.getItems().values()).extracting(Item::getDate).contains("2023-06-10");
-        assertThat(todo.getItems().values()).extracting(Item::getPriority).contains(Priority.NORMAL);
-        assertThat(todo.getItems().values()).extracting(Item::getTags).contains(tags);
+        assertThat(store.getItems().values()).extracting(Item::getStatus).contains(Status.COMPLETED);
+        assertThat(store.getItems().values()).extracting(Item::getValue).contains("Task");
+        assertThat(store.getItems().values()).extracting(Item::getDate).contains("2023-06-10");
+        assertThat(store.getItems().values()).extracting(Item::getPriority).contains(Priority.NORMAL);
+        assertThat(store.getItems().values()).extracting(Item::getTags).contains(tags);
 
-        assertThat(todo.getItems().values()).extracting(Item::getStatus).contains(Status.INCOMPLETED);
-        assertThat(todo.getItems().values()).extracting(Item::getValue).contains("Task 2");
-        assertThat(todo.getItems().values()).extracting(Item::getDate).contains("2023-06-01");
-        assertThat(todo.getItems().values()).extracting(Item::getPriority).contains(Priority.MINOR);
-        assertThat(todo.getItems().values()).extracting(Item::getTags).contains(tags);
+        assertThat(store.getItems().values()).extracting(Item::getStatus).contains(Status.INCOMPLETED);
+        assertThat(store.getItems().values()).extracting(Item::getValue).contains("Task 2");
+        assertThat(store.getItems().values()).extracting(Item::getDate).contains("2023-06-01");
+        assertThat(store.getItems().values()).extracting(Item::getPriority).contains(Priority.MINOR);
+        assertThat(store.getItems().values()).extracting(Item::getTags).contains(tags);
     }
 
     /**
@@ -98,7 +99,7 @@ public class ToDoListStoreTest {
         //GIVEN
         List<Tag> tags = new ArrayList<>();
         tags.add(Tag.HOME);
-        String id = todo.addItem(new Item("Task 1", "2023-06-11", Status.INPROGRESS, Priority.NORMAL, tags));
+        String id = store.addItem(new Item("Task 1", "2023-06-11", Status.INPROGRESS, Priority.NORMAL, tags));
         //WHEN
         Optional<Map.Entry<String, Item>> result = todo.getItemById(id);
         int size = result.stream().toArray().length;

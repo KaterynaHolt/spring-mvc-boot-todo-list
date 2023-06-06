@@ -3,6 +3,7 @@ package com.todolist.app.springmvcboottodolist.controllers;
 import com.todolist.app.springmvcboottodolist.models.Item;
 import com.todolist.app.springmvcboottodolist.models.Status;
 import com.todolist.app.springmvcboottodolist.service.Store;
+import com.todolist.app.springmvcboottodolist.service.ToDoListService;
 import com.todolist.app.springmvcboottodolist.service.ToDoListStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -19,12 +20,12 @@ import java.util.Optional;
 @RequestMapping("/notification")
 public class NotificationController {
     @Autowired
-    private ToDoListStore store;
+    private ToDoListService st;
 
     @GetMapping
     public String getNotification(@RequestParam String operation, @RequestParam String id, Model model){
-        store.chooseOperation(operation, id);
-        Optional<Map.Entry<String, Item>> result = store.getItemById(id);
+        st.chooseOperation(operation, id);
+        Optional<Map.Entry<String, Item>> result = st.getItemById(id);
         model.addAttribute("operation", operation);
         model.addAttribute("result", result);
         return "notification";

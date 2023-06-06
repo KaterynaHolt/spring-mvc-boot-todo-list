@@ -4,6 +4,7 @@ package com.todolist.app.springmvcboottodolist.controllers;
 import com.todolist.app.springmvcboottodolist.models.Item;
 import com.todolist.app.springmvcboottodolist.models.Status;
 import com.todolist.app.springmvcboottodolist.service.Store;
+import com.todolist.app.springmvcboottodolist.service.ToDoListService;
 import com.todolist.app.springmvcboottodolist.service.ToDoListStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ import java.util.Map;
 @RequestMapping("/see-all-tasks")
 public class SeeAllTasksController {
     @Autowired
-    private ToDoListStore todo;
+    private ToDoListService todo;
 
     @GetMapping
     public String getSeeAllTasks(Model model){
