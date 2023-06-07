@@ -34,8 +34,8 @@ public class NewTaskControllerTest {
         this.mockMvc.perform(post("/new-task").param("ADD", "ADD").param("text","Task 1").
                 param("date", "2023-10-05").param("status", "INCOMPLETED").
                 param("priority", "NORMAL").param("tags", "DAILYROUTINE").
-                param("tags", "HOME").param("tags", "READING")).andDo(print()).
-                andExpect(status().isOk());
+                param("tags", "HOME").param("tags", "READING")).andDo(print())
+                .andExpect(status().isFound());
     }
 
     /**

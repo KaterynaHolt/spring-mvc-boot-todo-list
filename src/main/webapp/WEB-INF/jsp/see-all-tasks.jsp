@@ -43,9 +43,9 @@
                         <div class="dropdown">
                             <button class="dropbtn" disabled="disabled"><i class="gg-more-o"></i></button>
                             <div class="dropdown-content">
-                                <a>Complete</a>
+                                <a href="/notification?operation=COMPLETE&id=<%=entry.getKey()%>">Complete</a>
                                 <a>Edit</a>
-                                <a>Remove</a>
+                                <a href="/notification?operation=REMOVE&id=<%=entry.getKey()%>">Remove</a>
                             </div>
                         </div>
                     </td>
@@ -82,8 +82,8 @@
                         <div class="dropdown">
                             <button class="dropbtn" disabled="disabled"><i class="gg-more-o"></i></button>
                             <div class="dropdown-content">
-                                <a>Incomplete</a>
-                                <a>Remove</a>
+                                <a href="/notification?operation=INCOMPLETE&id=<%=entrycom.getKey()%>">Incomplete</a>
+                                <a href="/notification?operation=REMOVE&id=<%=entrycom.getKey()%>">Remove</a>
                             </div>
                         </div>
                     </td>

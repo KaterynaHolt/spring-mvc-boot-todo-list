@@ -4,12 +4,13 @@ import com.todolist.app.springmvcboottodolist.models.Item;
 import com.todolist.app.springmvcboottodolist.models.Priority;
 import com.todolist.app.springmvcboottodolist.models.Tag;
 import jakarta.annotation.PostConstruct;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import com.todolist.app.springmvcboottodolist.models.Status;
 import java.util.*;
 
 
-@Service
+@Repository
 public class ToDoListStore implements Store{
     private final Map<String, Item> items = new LinkedHashMap<>();
 
@@ -31,31 +32,6 @@ public class ToDoListStore implements Store{
         tags3.add(Tag.READING);
         items.put(getUuid(), new Item("Task 3", "2023-04-10", Status.COMPLETED, Priority.CRITICAL, tags3));
     }
-
-    /**
-     * This method gets items to map by their Status
-     * @param status - status for choosing
-     * @return map with items, which are completed or not
-     */
-    public Map<String, Item> getItemsByStatus(Status status){
-        Map<String, Item> result = new LinkedHashMap<>();
-        if(status.equals(Status.COMPLETED)){
-            for(Map.Entry<String, Item> entry : getItems().entrySet()){
-                if(entry.getValue().getStatus().equals(Status.COMPLETED)){
-                    result.put(entry.getKey(), entry.getValue());
-                }
-            }
-        }
-        else{
-            for(Map.Entry<String, Item> entry : getItems().entrySet()){
-                if(!entry.getValue().getStatus().equals(Status.COMPLETED)){
-                    result.put(entry.getKey(), entry.getValue());
-                }
-            }
-        }
-        return result;
-    }
-
 
     public synchronized Map<String, Item> getItems() {
         return items;

@@ -28,9 +28,7 @@ public class NewTaskController {
                                 @RequestParam("tags") List<Tag> tags){
         Item item = new Item(text, date, status, priority, tags);
         String id = store.addItem(item);
-        System.out.println("New task " + id + " was added!");
-        //return "redirect:notification";
-        return "notification";
+        return "redirect:notification?operation=ADD&id=" + id;
     }
 
     @PostMapping(params = "CANCEL")

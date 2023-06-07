@@ -1,41 +1,39 @@
 package com.todolist.app.springmvcboottodolist.controllers;
 
-
 import com.todolist.app.springmvcboottodolist.models.Item;
 import com.todolist.app.springmvcboottodolist.models.Status;
 import com.todolist.app.springmvcboottodolist.service.Store;
 import com.todolist.app.springmvcboottodolist.service.ToDoListService;
 import com.todolist.app.springmvcboottodolist.service.ToDoListStore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
+import java.util.Optional;
 
 
 @Controller
-@RequestMapping("/see-all-tasks")
-public class SeeAllTasksController {
+@RequestMapping("/notification")
+public class NotificationController {
     @Autowired
-    private ToDoListService todo;
+    private ToDoListService st;
 
     @GetMapping
-    public String getSeeAllTasks(Model model){
-        Map<String, Item> onhold = todo.getItemsByStatus(Status.INCOMPLETED);
-        Map<String, Item> completed = todo.getItemsByStatus(Status.COMPLETED);
-
-        int count = onhold.size();
-        model.addAttribute("count", count);
-        model.addAttribute("onhold", onhold);
-        model.addAttribute("completed", completed);
-        return "see-all-tasks";
+    public String getNotification(@RequestParam String operation, @RequestParam String id, Model model){
+        st.chooseOperation(operation, id);
+        Optional<Map.Entry<String, Item>> result = st.getItemById(id);
+        model.addAttribute("operation", operation);
+        model.addAttribute("result", result);
+        return "notification";
     }
 
-    @PostMapping
-    public String pushAddButton(){
-        return "redirect:new-task";
+    @PostMapping(params = "RETURN")
+    public String pushReturnButton(){
+        return "redirect:see-all-tasks";
     }
 
 }
