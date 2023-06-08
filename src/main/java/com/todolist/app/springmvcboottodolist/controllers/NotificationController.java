@@ -20,12 +20,12 @@ import java.util.Optional;
 @RequestMapping("/notification")
 public class NotificationController {
     @Autowired
-    private ToDoListService st;
+    private ToDoListService toDoListService;
 
     @GetMapping
     public String getNotification(@RequestParam String operation, @RequestParam String id, Model model){
-        st.chooseOperation(operation, id);
-        Optional<Map.Entry<String, Item>> result = st.getItemById(id);
+        toDoListService.chooseOperation(operation, id);
+        Optional<Map.Entry<String, Item>> result = toDoListService.getItemById(id);
         model.addAttribute("operation", operation);
         model.addAttribute("result", result);
         return "notification";
