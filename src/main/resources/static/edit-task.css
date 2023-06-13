@@ -1,0 +1,167 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+html {
+    font-size: 13px;
+}
+
+body{
+    background: linear-gradient(to right, lightpink, cornflowerblue);
+    padding: 0 10px;
+
+}
+
+.edittask{
+    padding: 50px 0;
+}
+
+.edittask form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 490px;
+    height: 540px;
+    padding: 50px 70px;
+    border-radius: 25px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.125);
+    background-color: white;
+}
+
+.edittask form h2{
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 26px;
+}
+
+.edittask .textbox{
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 350px;
+    height: 30px;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    margin-top: 5px;
+}
+
+.edittask .edit{
+    font-size: 14px;
+    background-color: limegreen;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-family: sans-serif;
+    border-radius: 10px;
+    margin-top: 25px;
+    margin-left: 192px;
+    width: 75px;
+    height: 30px;
+}
+
+.edittask .edit:hover {
+    background-color: forestgreen;
+    color: white;
+    transition: 0.7s;
+}
+
+.edittask .edit:active {
+    box-shadow: 0px 0px 2px 2px black;
+}
+
+.edittask .cancel{
+    font-size: 14px;
+    background-color: dodgerblue;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-family: sans-serif;
+    border-radius: 10px;
+    margin-top: 25px;
+    width: 75px;
+    height: 30px;
+}
+
+.edittask .cancel:hover {
+    background-color: slateblue;
+    color: white;
+    transition: 0.7s;
+}
+
+.edittask .cancel:active {
+    box-shadow: 0px 0px 2px 2px darkgrey;
+}
+
+.edittask .form-group label{
+    font-size: 12px;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin-top: 15px;
+    padding: 10px 0;
+}
+
+.edittask .form-group-status label{
+    font-size: 12px;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin-top: 15px;
+    padding: 10px 0;
+}
+
+.edittask .label-form{
+    font-size: 13px;
+    font-family: sans-serif;
+    padding: 5px 0;
+    right: 0px;
+    margin-left: 450px;
+    margin-top: -350px;
+}
+
+.edittask .label-form label{
+    padding: 5px 0;
+    margin-bottom: 5px;
+}
+
+.edittask .select {
+    color: black;
+    background-color: white;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: sans-serif;
+
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 350px;
+    height: 30px;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    margin-top: 5px;
+}
+
+.edittask .select-mult {
+    color: black;
+    background-color: white;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: sans-serif;
+
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 350px;
+    height: 30px;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    margin-top: 5px;
+}
+
+.edittask .note{
+    color: red;
+    margin-top: 10px;
+}

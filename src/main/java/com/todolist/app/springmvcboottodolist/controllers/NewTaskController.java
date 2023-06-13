@@ -4,6 +4,7 @@ import com.todolist.app.springmvcboottodolist.models.Item;
 import com.todolist.app.springmvcboottodolist.models.Priority;
 import com.todolist.app.springmvcboottodolist.models.Status;
 import com.todolist.app.springmvcboottodolist.models.Tag;
+import com.todolist.app.springmvcboottodolist.service.ToDoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import com.todolist.app.springmvcboottodolist.service.Store;
 @RequestMapping("/new-task")
 public class NewTaskController {
     @Autowired
-    private Store store;
+    private ToDoListService toDoListService;
 
     @GetMapping
     public String getNewTask(){
@@ -27,7 +28,7 @@ public class NewTaskController {
                                 @RequestParam("status") Status status, @RequestParam("priority") Priority priority,
                                 @RequestParam("tags") List<Tag> tags){
         Item item = new Item(text, date, status, priority, tags);
-        String id = store.addItem(item);
+        String id = toDoListService.addItemService(item);
         return "redirect:notification?operation=ADD&id=" + id;
     }
 

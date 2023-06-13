@@ -44,7 +44,7 @@
                             <button class="dropbtn" disabled="disabled"><i class="gg-more-o"></i></button>
                             <div class="dropdown-content">
                                 <a href="/notification?operation=COMPLETE&id=<%=entry.getKey()%>">Complete</a>
-                                <a>Edit</a>
+                                <a href="/edit-task?id=<%=entry.getKey()%>">Edit</a>
                                 <a href="/notification?operation=REMOVE&id=<%=entry.getKey()%>">Remove</a>
                             </div>
                         </div>

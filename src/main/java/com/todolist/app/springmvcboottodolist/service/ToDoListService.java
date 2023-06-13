@@ -4,15 +4,18 @@ import com.todolist.app.springmvcboottodolist.models.Item;
 import com.todolist.app.springmvcboottodolist.models.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
+
 @Service
 public class ToDoListService {
     @Autowired
-    private ToDoListStore td;
+    private ToDoListStore toDoListStore;
+
+    @Autowired
+    private Store store;
 
     /**
      * This method choose operation, which must be done
@@ -20,14 +23,16 @@ public class ToDoListService {
      * @param id - id of item
      */
     public void chooseOperation(String operation, String id){
-        if(operation.equals("COMPLETE")){
-            td.changeStatus(id, Status.COMPLETED);
-        }
-        else if(operation.equals("INCOMPLETE")){
-            td.changeStatus(id, Status.INCOMPLETED);
-        }
-        else if(operation.equals("REMOVE")){
-            td.removeItem(id);
+        switch (operation) {
+            case "COMPLETE" :
+                toDoListStore.changeStatus(id, Status.COMPLETED);
+                break;
+            case "INCOMPLETE" :
+                toDoListStore.changeStatus(id, Status.INCOMPLETED);
+                break;
+            case "REMOVE" :
+                toDoListStore.removeItem(id);
+                break;
         }
     }
 
@@ -37,7 +42,7 @@ public class ToDoListService {
      * @return result - map of id and Item
      */
     public Optional<Map.Entry<String, Item>> getItemById(String id){
-        Optional<Map.Entry<String, Item>> result = td.getItems().entrySet().stream().filter(val -> val.getKey().
+        Optional<Map.Entry<String, Item>> result = toDoListStore.getItems().entrySet().stream().filter(val -> val.getKey().
                 equals(id)).findFirst();
         return result;
     }
@@ -50,19 +55,27 @@ public class ToDoListService {
     public Map<String, Item> getItemsByStatus(Status status){
         Map<String, Item> result = new LinkedHashMap<>();
         if(status.equals(Status.COMPLETED)){
-            for(Map.Entry<String, Item> entry : td.getItems().entrySet()){
+            for(Map.Entry<String, Item> entry : toDoListStore.getItems().entrySet()){
                 if(entry.getValue().getStatus().equals(Status.COMPLETED)){
                     result.put(entry.getKey(), entry.getValue());
                 }
             }
         }
         else{
-            for(Map.Entry<String, Item> entry : td.getItems().entrySet()){
+            for(Map.Entry<String, Item> entry : toDoListStore.getItems().entrySet()){
                 if(!entry.getValue().getStatus().equals(Status.COMPLETED)){
                     result.put(entry.getKey(), entry.getValue());
                 }
             }
         }
         return result;
+    }
+
+    public void changeItemService(String uuid, Item item){
+        store.changeItem(uuid, item);
+    }
+
+    public String addItemService(Item item){
+        return store.addItem(item);
     }
 }
