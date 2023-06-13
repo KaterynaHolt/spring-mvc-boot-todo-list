@@ -14,6 +14,9 @@ public class ToDoListService {
     @Autowired
     private ToDoListStore toDoListStore;
 
+    @Autowired
+    private Store store;
+
     /**
      * This method choose operation, which must be done
      * @param operation - title of operation
@@ -31,17 +34,6 @@ public class ToDoListService {
                 toDoListStore.removeItem(id);
                 break;
         }
-
-
-        /*if(operation.equals("COMPLETE")){
-            toDoListStore.changeStatus(id, Status.COMPLETED);
-        }
-        else if(operation.equals("INCOMPLETE")){
-            toDoListStore.changeStatus(id, Status.INCOMPLETED);
-        }
-        else if(operation.equals("REMOVE")){
-            toDoListStore.removeItem(id);
-        }*/
     }
 
     /**
@@ -77,5 +69,13 @@ public class ToDoListService {
             }
         }
         return result;
+    }
+
+    public void changeItemService(String uuid, Item item){
+        store.changeItem(uuid, item);
+    }
+
+    public String addItemService(Item item){
+        return store.addItem(item);
     }
 }

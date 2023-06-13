@@ -23,9 +23,6 @@ public class EditTaskController {
     @Autowired
     private ToDoListService toDoListService;
 
-    @Autowired
-    private Store store;
-
     @GetMapping
     public String getEditTask(Model model, HttpServletRequest request){
         String uuid = request.getParameter("id");
@@ -39,7 +36,7 @@ public class EditTaskController {
                                  @RequestParam("status") Status status, @RequestParam("priority") Priority priority,
                                  @RequestParam("tags") List<Tag> tags, @RequestParam("uuid") String uuid){
         Item item = new Item(text, date, status, priority, tags);
-        store.changeItem(uuid, item);
+        toDoListService.changeItemService(uuid, item);
         return "redirect:notification?operation=EDIT&id=" + uuid;
     }
 
