@@ -74,10 +74,11 @@ body{
 }
 
 .see-all .table-incompleted{
+    display: table;
     height: 200px;
-    overflow: auto;
+    overflow: visible;
     margin-top: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 45px;
 }
 
 .see-all .table-incompleted table{
@@ -133,6 +134,7 @@ body{
 }
 
 .see-all .table-completed{
+    display: table;
     height: 200px;
     overflow: auto;
     margin-top: 20px;
@@ -195,7 +197,7 @@ body{
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: white;
     min-width: 97px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -207,15 +209,17 @@ body{
     text-decoration: none;
     display: block;
     text-align: left;
+
 }
 
 .dropdown-content a:hover {
-    background-color: #ddd;
+    background-color: #e5e5e1;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
     float: left;
+
 }
 
 .dropdown:hover .dropbtn {
