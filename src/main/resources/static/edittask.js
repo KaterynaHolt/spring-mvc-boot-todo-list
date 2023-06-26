@@ -20,7 +20,11 @@ function validateForm() {
     if (tags == ""){
         warnings.push(" Tags");
     }
-    if (warnings.length != 0){
+    if (warnings.length == 1){
+        alert("You haven't filled" + warnings.toString() + " field!");
+        return false;
+    }
+    if (warnings.length > 1){
         alert("You haven't filled" + warnings.toString() + " fields!");
         return false;
     }
