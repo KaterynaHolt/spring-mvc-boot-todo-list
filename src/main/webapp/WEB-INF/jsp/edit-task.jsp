@@ -36,7 +36,7 @@
             <select class="select" name="status">
                 <option value="<%= item.get().getValue().getStatus().toString().toUpperCase(java.util.Locale.ROOT)%>"
                         hidden="hidden"><%= item.get().getValue().getStatus()%></option>
-                <option value="INPROGRESS">Inprogress</option>
+                <option value="INPROGRESS">In progress</option>
                 <option value="PENDING">Pending</option>
                 <option value="COMPLETED">Completed</option>
                 <option value="INCOMPLETED">Incompleted</option>
