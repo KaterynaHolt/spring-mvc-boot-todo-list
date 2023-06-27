@@ -7,26 +7,28 @@ public enum Status {
     /**
      * This status means that the task is done
      */
-    COMPLETED,
+    COMPLETED("Completed"),
     /**
      * This status means that the task hasn't been done yet
      */
-    INCOMPLETED,
+    INCOMPLETED("Incompleted"),
     /**
      * This status means that the task is being worked
      */
-    INPROGRESS,
+    INPROGRESS("In progress"),
     /**
      * This status means that the task is in a queue
      */
-    PENDING;
+    PENDING("Penging");
+
+    private final String name;
+
+    Status(String status) {
+        this.name = status;
+    }
 
     @Override
     public String toString() {
-        String str = name().toLowerCase().substring(0, 1).toUpperCase() + name().toLowerCase().substring(1);
-        if(str.equals("Inprogress")){
-            str = "In progress";
-        }
-        return str;
+        return this.name;
     }
 }

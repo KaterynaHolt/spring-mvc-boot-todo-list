@@ -1,13 +1,18 @@
 package com.todolist.app.springmvcboottodolist.models;
 
 public enum Priority {
-    MINOR,
-    CRITICAL,
-    NORMAL;
+    MINOR("Minor"),
+    CRITICAL("Critical"),
+    NORMAL("Normal");
+
+    private final String name;
+
+    Priority(String priority) {
+        this.name = priority;
+    }
 
     @Override
     public String toString() {
-        String str = name().toLowerCase().substring(0, 1).toUpperCase() + name().toLowerCase().substring(1);
-        return str;
+        return this.name;
     }
 }
