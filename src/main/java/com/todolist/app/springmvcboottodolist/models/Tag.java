@@ -1,14 +1,19 @@
 package com.todolist.app.springmvcboottodolist.models;
 
 public enum Tag {
-    DAILYROUTINE,
-    HOME,
-    WORK,
-    READING;
+    DAILYROUTINE("Daily routine"),
+    HOME("Home"),
+    WORK("Work"),
+    READING("Reading");
+
+    private final String name;
+
+    Tag(String tag) {
+        this.name = tag;
+    }
 
     @Override
     public String toString() {
-        String str = name().toLowerCase().substring(0, 1).toUpperCase() + name().toLowerCase().substring(1);
-        return str;
+        return this.name;
     }
 }
