@@ -28,7 +28,8 @@
         </div>
         <div class="form-group">
             <label class="text">Due date <br>
-                <input type="date" class="textbox" name="date" value="<%=item.get().getValue().getDate()%>" />
+                <input type="date" onkeydown="return false" class="textbox" name="date"
+                       value="<%=item.get().getValue().getDate()%>" />
             </label>
         </div>
         <div class="form-group">
