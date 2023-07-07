@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
             <label class="text">Due date <br>
-                <input type="date" class="textbox" name="date"/>
+                <input type="date" onkeydown="return false" class="textbox" name="date"/>
             </label>
         </div>
         <div class="form-group">
