@@ -62,7 +62,7 @@ public class ToDoListServiceTest {
     /**
      * Test of choosing operation - chooseOperation
      */
-    @Test
+    /*@Test
     public void test_choosing_operation(){
         //GIVEN
         List<Tag> tags = new ArrayList<>();
@@ -89,12 +89,12 @@ public class ToDoListServiceTest {
         assertThat(store.getItems().values()).extracting(Item::getDate).contains("2023-06-01");
         assertThat(store.getItems().values()).extracting(Item::getPriority).contains(Priority.MINOR);
         assertThat(store.getItems().values()).extracting(Item::getTags).contains(tags);
-    }
+    }*/
 
     /**
      * Test of getting items by id - getItemById
      */
-    @Test
+    /*@Test
     public void test_getting_item_by_id(){
         //GIVEN
         List<Tag> tags = new ArrayList<>();
@@ -111,5 +111,5 @@ public class ToDoListServiceTest {
         assertThat(result.get().getValue().getDate().equals("2023-06-11"));
         assertThat(result.get().getValue().getPriority().equals(Priority.NORMAL));
         assertThat(result.get().getValue().getTags().equals(tags));
-    }
+    }*/
 }

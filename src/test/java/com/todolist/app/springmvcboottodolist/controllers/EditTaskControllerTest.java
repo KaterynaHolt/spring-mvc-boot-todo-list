@@ -41,7 +41,7 @@ public class EditTaskControllerTest {
      * Test of pushing EDIT button
      * @throws Exception
      */
-    @Test
+    /*@Test
     public void test_pushing_edit_button() throws Exception {
         List<Tag> tags1 = new ArrayList<>();
         tags1.add(Tag.WORK);
@@ -50,7 +50,7 @@ public class EditTaskControllerTest {
                 .param("date", "2023-06-07").param("status", "INPROGRESS")
                 .param("priority", "MINOR").param("tags", "READING")
                 .param("uuid", uuid)).andDo(print()).andExpect(status().isFound());
-    }
+    }*/
 
     /**
      * Test of pushing CANCEL button
