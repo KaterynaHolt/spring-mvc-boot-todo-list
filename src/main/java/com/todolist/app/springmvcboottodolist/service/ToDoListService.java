@@ -17,6 +17,9 @@ public class ToDoListService {
     @Autowired
     private Store store;
 
+    @Autowired
+    private TaskRepository taskRepository;
+
     /**
      * This method choose operation, which must be done
      * @param operation - title of operation
@@ -25,13 +28,17 @@ public class ToDoListService {
     public void chooseOperation(String operation, String id){
         switch (operation) {
             case "COMPLETE" :
-                toDoListStore.changeStatus(id, Status.COMPLETED);
+                //toDoListStore.changeStatus(id, Status.COMPLETED);
+                taskRepository.changeStatusForCompleted(id);
+
                 break;
             case "INCOMPLETE" :
-                toDoListStore.changeStatus(id, Status.INCOMPLETED);
+                //toDoListStore.changeStatus(id, Status.INCOMPLETED);
+                taskRepository.changeStatusForIncompleted(id);
                 break;
             case "REMOVE" :
-                toDoListStore.removeItem(id);
+                //toDoListStore.removeItem(id);
+                taskRepository.deleteById(id);
                 break;
         }
     }
